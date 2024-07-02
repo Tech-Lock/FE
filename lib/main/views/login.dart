@@ -19,12 +19,14 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            primary: const Color(0xFFFFFFFF), // ElevatedButton 색상 설정
+            backgroundColor: const Color(0xFFFFFFFF), // ElevatedButton 색상 설정
           ),
         ),
         inputDecorationTheme: const InputDecorationTheme(
+          filled: true, // 배경을 채울지 여부
+          fillColor: Color(0xFFF6F6F6), // 배경색 설정
           enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black), // 비활성화 상태의 테두리 색상 설정
+            borderSide: BorderSide(color: Color(0xFFE8E8E8)), // 비활성화 상태의 테두리 색상 설정
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Color(0xFF5DB075)), // 포커스 상태의 테두리 색상 설정
@@ -67,6 +69,7 @@ class LoginPage extends StatelessWidget {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: '이메일',
+                    labelStyle: TextStyle(color: Color(0xFFBDBDBD)),
                   ),
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
@@ -76,6 +79,7 @@ class LoginPage extends StatelessWidget {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: '비밀번호',
+                    labelStyle: TextStyle(color: Color(0xFFBDBDBD)),
                   ),
                   obscureText: true,
                   keyboardType: TextInputType.visiblePassword,
