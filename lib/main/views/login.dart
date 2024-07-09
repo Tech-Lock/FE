@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:tech_lock/main/views/main_home.dart';
 
 void main() {
@@ -33,13 +35,61 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const LoginPage(),
+      home: LoginPage(),
     );
   }
 }
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<void> login(BuildContext context) async {
+    // 로그인 정보 객체 생성
+    Map<String, String> loginData = {
+      'email': emailController.text,
+      'password': passwordController.text,
+    };
+
+    // 로그인 정보 객체를 JSON으로 변환
+    String loginDataJson = jsonEncode(loginData);
+
+    // API 엔드포인트 URL
+    String apiUrl = 'http://172.23.240.1:8080/users/login'; // 서버 URL로 변경
+
+    try {
+      // HTTP POST 요청 보내기
+      final response = await http.post(
+        Uri.parse(apiUrl),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: loginDataJson,
+      );
+
+      if (response.statusCode == 200) {
+        print('로그인 성공');
+        // 메인 페이지로 이동
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const MyHomePage()),
+        );
+      } else {
+        print('로그인 실패: ${response.body}');
+        // 실패 메시지 표시
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('로그인에 실패했습니다. 다시 시도해주세요.')),
+        );
+      }
+    } catch (e) {
+      print('HTTP 요청 실패: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('네트워크 오류가 발생했습니다. 나중에 다시 시도해주세요.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +116,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 TextFormField(
+                  controller: emailController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: '이메일',
@@ -76,6 +127,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
+                  controller: passwordController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: '비밀번호',
@@ -87,12 +139,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20.0),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => const MyHomePage()),
-                    );
-                  },
+                  onPressed: () => login(context),
                   child: const Text('로그인'),
                 ),
               ],
