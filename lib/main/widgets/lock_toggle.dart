@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
 }
 
 class LockToggle extends StatefulWidget {
-  const LockToggle({Key? key});
+  const LockToggle({Key? key}) : super(key: key);
 
   @override
   _LockToggleState createState() => _LockToggleState();
@@ -30,10 +31,26 @@ class LockToggle extends StatefulWidget {
 class _LockToggleState extends State<LockToggle> {
   bool isLockSelected = true;
 
-  void toggleSelection() {
+  void toggleSelection() async {
     setState(() {
       isLockSelected = !isLockSelected;
     });
+
+    final String apiUrl = isLockSelected
+        ? 'http://172.23.240.1:8080/main/door/close'
+        : 'http://172.23.240.1:8080/main/door/open';
+
+    try {
+      final response = await http.post(Uri.parse(apiUrl));
+
+      if (response.statusCode == 200) {
+        print('Request to $apiUrl successful');
+      } else {
+        print('Request to $apiUrl failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Request to $apiUrl failed with error: $e');
+    }
   }
 
   @override
