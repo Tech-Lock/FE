@@ -33,19 +33,19 @@ class MyHomePage extends StatelessWidget {
             top: 0,
             left: 0,
             right: 0,
-            height: 250.0,
+            height: 200.0,
             child: Container(
               color: const Color(0xFF5DB075),
             ),
           ),
           const Positioned(
-            top: 130,
+            top: 80,
             left: 0,
             right: 0,
             child: LockToggle(), // LockToggle 추가
           ),
           const Positioned(
-            top: 370,
+            top: 320,
             left: 0,
             right: 0,
             child: Column(
@@ -56,7 +56,7 @@ class MyHomePage extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 440,
+            top: 390,
             left: 0,
             right: 0,
             bottom: 0,
