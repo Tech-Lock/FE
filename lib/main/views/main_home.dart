@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-        debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
   }
@@ -61,7 +61,7 @@ class MyHomePage extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: ListView.builder(
-              itemCount: 8, // 예시로 20개의 아이템을 생성
+              itemCount: 20, // 예시로 20개의 아이템을 생성
               itemBuilder: (context, index) {
                 return Column(
                   children: [
