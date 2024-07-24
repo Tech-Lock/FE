@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_lock/main/widgets/lock_toggle.dart';
-import 'package:tech_lock/main/widgets/content_toggle.dart';
+import 'package:tech_lock/main/widgets/random_password.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,7 +51,7 @@ class MyHomePage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ContentToggle(),
+                RandomPassword(),
               ],
             ),
           ),

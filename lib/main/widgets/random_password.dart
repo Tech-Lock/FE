@@ -13,21 +13,21 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: ContentToggle(),
+          child: RandomPassword(),
         ),
       ),
     );
   }
 }
 
-class ContentToggle extends StatefulWidget {
-  const ContentToggle({Key? key});
+class RandomPassword extends StatefulWidget {
+  const RandomPassword({Key? key});
 
   @override
-  _ContentToggleState createState() => _ContentToggleState();
+  _RandomPasswordState createState() => _RandomPasswordState();
 }
 
-class _ContentToggleState extends State<ContentToggle> {
+class _RandomPasswordState extends State<RandomPassword> {
   bool isPostSelected = true;
 
   void toggleSelection() {
@@ -41,7 +41,7 @@ class _ContentToggleState extends State<ContentToggle> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        final randomNumber = 100000 + Random().nextInt(900000); // 100000부터 999999까지의 랜덤 숫자
+        final randomNumber = 1000 + Random().nextInt(9000); // 100000부터 999999까지의 랜덤 숫자
         return AlertDialog(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
@@ -77,7 +77,7 @@ class _ContentToggleState extends State<ContentToggle> {
         width: 340,
         height: 50,
         decoration: BoxDecoration(
-          color: isPostSelected ? const Color(0xFFF6F6F6) : Colors.grey[300],
+          color: Color(0xFFF6F6F6),
           borderRadius: BorderRadius.circular(100),
           border: Border.all(
             color: const Color(0xFFE8E8E8),
