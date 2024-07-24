@@ -43,7 +43,7 @@ class _RandomPasswordState extends State<RandomPassword> {
       builder: (BuildContext context) {
         final randomNumber = 1000 + Random().nextInt(9000);
         return AlertDialog(
-          backgroundColor: const Color(0xFFE5F5E8),
+          backgroundColor: const Color(0xFFE5F5E3),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
           ),
@@ -60,7 +60,7 @@ class _RandomPasswordState extends State<RandomPassword> {
             TextButton(
               child: const Text('닫기',
                 style: TextStyle(
-                  color: Color(0xFF5DB075),
+                  color: Colors.black,
                 ),
               ),
               onPressed: () {
