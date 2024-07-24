@@ -41,8 +41,9 @@ class _RandomPasswordState extends State<RandomPassword> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        final randomNumber = 1000 + Random().nextInt(9000); // 100000부터 999999까지의 랜덤 숫자
+        final randomNumber = 1000 + Random().nextInt(9000);
         return AlertDialog(
+          backgroundColor: const Color(0xFFE5F5E8),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(20.0)),
           ),
@@ -57,7 +58,11 @@ class _RandomPasswordState extends State<RandomPassword> {
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('닫기'),
+              child: const Text('닫기',
+                style: TextStyle(
+                  color: Color(0xFF5DB075),
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -77,7 +82,7 @@ class _RandomPasswordState extends State<RandomPassword> {
         width: 340,
         height: 50,
         decoration: BoxDecoration(
-          color: Color(0xFFF6F6F6),
+          color: const Color(0xFFF6F6F6),
           borderRadius: BorderRadius.circular(100),
           border: Border.all(
             color: const Color(0xFFE8E8E8),
